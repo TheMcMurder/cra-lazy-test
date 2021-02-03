@@ -1,6 +1,6 @@
 const fs = require("fs")
 const path = require("path")
-const numberToGenerate = 5000
+const numberToGenerate = 50
 const basePath = path.resolve(__dirname, '../src/generated/')
 
 for(let i = 0; i < numberToGenerate; i++) {
