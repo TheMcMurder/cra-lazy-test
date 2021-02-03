@@ -16,7 +16,7 @@ SystemJS variant
 
 Test some extreme `react.lazy` scenarios in chrome to see if an internal bug is actually related to `react.lazy` or if that's a false flag
 
-### Okay but 5k files is rediculous
+### Okay but 5k files is ridiculous 
 
 Yup.
 
