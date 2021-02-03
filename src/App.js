@@ -1,23 +1,43 @@
-import logo from './logo.svg';
+import { lazy, Suspense, useState } from 'react'
+import { ErrorBoundary } from './error-boundary.js'
 import './App.css';
 
+const laziesLength = 5000
+const lazies = Array.from(Array(laziesLength).keys()).map((item, index) => {
+  return lazy(() => import(`./generated/generated_${index}.js`))
+})
+console.log('lazies', lazies)
+
 function App() {
+  const [showLazies, setShowLazies] = useState(false)
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>
+          React Lazy extreme test
+        </div>
+        <button onClick={() => {
+          setShowLazies(old => !old)
+        }}>
+          Toggle Lazies
+        </button>
       </header>
+      <div className='lazyContainer'>
+        {
+          !showLazies ? 'No lazies' : (
+            lazies.map((LazyComp, index) => {
+              return (<div key={index}>
+                  <ErrorBoundary errorMessage={`Error loading ${index}`}>
+                <Suspense fallback={`Loading ${index}`}>
+                    <LazyComp />
+                </Suspense>
+                  </ErrorBoundary>
+              </div>
+              )
+            })
+          )
+        }
+      </div>
     </div>
   );
 }
