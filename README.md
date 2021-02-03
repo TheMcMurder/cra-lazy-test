@@ -1,3 +1,5 @@
+SystemJS variant
+
 # running project
 
 ## Dev mode (slower)
